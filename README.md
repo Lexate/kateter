@@ -1,1 +1,22 @@
-# Kateter
+
+# Calibration
+
+The calibration procedure for the system is to do a full rotation at each bend angle. The rotation angle is calculated from assuming a constant speed of rotation. This is then stored as two vectors, one representing bend and rotation and the other storing sensor values at the same point.
+
+The zero point of the sensors does seem to drift a bit over time so calibration will probably hav to be done 
+
+# Structure
+
+Data is collected via the daqassistant in labview. This is then passed as doubles to a python module running under python 3.10. The python fuction returns two doubles representing the rotation and bend of the catheter. 
+
+As a result of running python through labview the python module does not keep state between labview iterations. This means that all state must either be hadled with files or passed through labview.
+
+## Python module
+
+*Input:* A number (2~3) of sensor inputs measured in Ohms
+
+*Output:* Vector of two values `[bend, rot]` represented by `[α, β]` in the spec
+
+*Short explanation:* The input values are matched to the closest sensor data vector from the calibration data, this links to a vector representing the output.
+
+To find the best match from the calibration data the sensor values can be represented as points in n-dimentional space where n is the number of sensors. The input data can then be mapped to the same space and a closest point calculated. (*I need to look into how to do this with vectors*)
