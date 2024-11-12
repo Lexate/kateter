@@ -21,18 +21,16 @@ def stepthrough():
                 writer.writerow([row[0], row[1], row[2], rot])
 
 
-def main(r1: float, r2: float, r3: float):
+def main(r1: float, r2: float, r3: float, bend: float):
     import csv
     from datetime import datetime
     import numpy as np
-
-    bend = 0
     rot = 0
 
-    with open("C:/Users/lexa/Documents/circle.csv", mode="a", newline='') as csv_file:
-        writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    
-        writer.writerow([datetime.now(), r1, r2, r3])
+    #with open("C:/Users/lexa/Documents/circle.csv", mode="a", newline='') as csv_file:
+    #    writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    #
+    #    writer.writerow([datetime.now(), bend, r1, r2, r3])
 
     return (bend, rot)
 
