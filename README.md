@@ -16,7 +16,7 @@ When record bool is true it generates and writes to a file:
 
 ## Python post processor
 
-This takes the above file and computes the rotation angle. It  takes a zero value from the first points 
+This takes the above file and computes the rotation angle. It takes a zero value from the first points 
 
 # Structure
 

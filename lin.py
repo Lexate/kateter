@@ -32,9 +32,34 @@ def generate_bench(n: int):
         for i in range(n):
             writer.writerow([random.random() * 100, random.random() * 100, random.random() * 10000, random.random() * 10000, random.random() * 10000])
 
-if __name__ == "__main__":
-    generate_bench(5000)
+def count_lines_in_csv(file_path):
+    with open(file_path, 'r', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        line_count = sum(1 for row in reader)  # Count each row
+    return line_count
 
-    time.sleep(1)
+def circle_angle(path: str):
+    with open(path, mode='r', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter = ',')
+
+        num_points = count_lines_in_csv(path)
+        angle_increment = 360 / num_points # deg
+
+        with open(path + ".cal", mode = 'w', newline='') as cal_file:
+            writer = csv.writer(cal_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            rot = 0
+
+            for row in reader:
+                writer.writerow(row[4], rot, row[1], row[2], row[3])
+                rot += angle_increment
+
+                
+
+if __name__ == "__main__":
+    #generate_bench(5000)
+
+    #time.sleep(1)
     
-    print(f"{closest_point('bench.csv', (-1.0, -1.0, -1.0))}")
+    #print(f"{closest_point('bench.csv', (-1.0, -1.0, -1.0))}")
+
+    circle_angle("measurements/circle_copy.csv")

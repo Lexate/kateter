@@ -27,10 +27,10 @@ def main(r1: float, r2: float, r3: float, bend: float):
     import numpy as np
     rot = 0
 
-    #with open("C:/Users/lexa/Documents/circle.csv", mode="a", newline='') as csv_file:
-    #    writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    #
-    #    writer.writerow([datetime.now(), bend, r1, r2, r3])
+    with open("C:/Users/lexa/Documents/Kateter/deg45.csv", mode="a", newline='') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    
+        writer.writerow([datetime.now(), r1, r2, r3, bend])
 
     return (bend, rot)
 
