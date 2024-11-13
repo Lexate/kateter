@@ -4,6 +4,9 @@ import random
 import time
 
 def closest_point(path: str, sensors: tuple):
+    """Takes in a path to a calibration file and a tuple of sensors values and outputs
+    the angle of the closest calibration value in the provided file.
+    """
     t1 = time.time_ns()
     b = np.array(sensors)
 
@@ -26,6 +29,9 @@ def closest_point(path: str, sensors: tuple):
     return closest_ang
 
 def generate_bench(n: int):
+    """Generates a test file (bench.csv) of `n: int` random values for testing the 
+    performance of `closest_point()`
+    """
     with open("bench.csv", mode="w", newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
@@ -33,12 +39,17 @@ def generate_bench(n: int):
             writer.writerow([random.random() * 100, random.random() * 100, random.random() * 10000, random.random() * 10000, random.random() * 10000])
 
 def count_lines_in_csv(file_path):
+    """Returns the number of lines in the provided csv file"""
     with open(file_path, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile)
         line_count = sum(1 for row in reader)  # Count each row
     return line_count
 
 def circle_angle(path: str):
+    """Takes a recording of one rotation at continous speed at a specified "bend" angle 
+    and returns a file with calculated angles for rotation in the format expected by
+    `closest_point`
+    """
     with open(path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
 
@@ -50,16 +61,34 @@ def circle_angle(path: str):
             rot = 0
 
             for row in reader:
-                writer.writerow(row[4], rot, row[1], row[2], row[3])
+                writer.writerow([row[4], rot, row[1], row[2], row[3]])
                 rot += angle_increment
 
-                
+def zero_zero(path: str):
+    """Takes the recording of the zero position of the sensors and outputs
+    a file in the format expected by `closest_point` with rotation set to 
+    zero
+    """
+    with open(path, mode='r', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter = ',')
+        rot = 0
+
+        with open(path + ".cal", mode = 'w', newline='') as cal_file:
+            writer = csv.writer(cal_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            for row in reader:
+                writer.writerow([row[4], rot, row[1], row[2], row[3]])             
 
 if __name__ == "__main__":
-    #generate_bench(5000)
+    zero_zero("Calibration/deg0.csv")
+    circle_angle("Calibration/deg15_1.csv")
+    circle_angle("Calibration/deg15_2.csv")
+    circle_angle("Calibration/deg15_3.csv")
 
-    #time.sleep(1)
-    
-    #print(f"{closest_point('bench.csv', (-1.0, -1.0, -1.0))}")
+    circle_angle("Calibration/deg30_1.csv")
+    circle_angle("Calibration/deg30_2.csv")
+    circle_angle("Calibration/deg30_3.csv")
 
-    circle_angle("measurements/circle_copy.csv")
+    circle_angle("Calibration/deg45_1.csv")
+    circle_angle("Calibration/deg45_2.csv")
+    circle_angle("Calibration/deg45_3.csv")
