@@ -43,7 +43,7 @@ def cal(r1: float, r2: float, r3: float, bend: float):
 def main(r1: float, r2: float, r3: float):
     """Takes sensor values in the same order as calibrated and outputs the bend and rotation
     of the catheter. To change the calibration values used or multiple that the rotation rounds 
-    to change the variables at the begining of the method
+    to change the variables at the begining of the method.
     """
     import lin
     path = "C:/Users/lexa/Documents/Kateter/Calibration/cal.csv"
