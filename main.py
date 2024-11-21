@@ -24,7 +24,7 @@ def stepthrough(path: str):
                 writer.writerow([row[0], row[1], row[2], rot])
 
 
-def cal(r1: float, r2: float, r3: float, bend: float):
+def cal(r1: float, r2: float, r3: float, bend: float, start_stop: bool):
     """Takes sensor values as well as a value for the "bend" / deflection of the katheter 
     and writes this to a file in the format expected by `circle_angle()` in lin.py 
     """
@@ -33,10 +33,10 @@ def cal(r1: float, r2: float, r3: float, bend: float):
     import numpy as np
     rot = 0
 
-    with open(f"C:/Users/lexa/Documents/Kateter/deg{int(bend)}.csv", mode="a", newline='') as csv_file:
+    with open(f"C:/Users/lexa/Documents/Kateter/Calibration/deg{int(bend)}.csv", mode="a", newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     
-        writer.writerow([datetime.now(), r1, r2, r3, bend])
+        writer.writerow([datetime.now(), r1, r2, r3, bend, start_stop])
 
     return (bend, rot)
 
