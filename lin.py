@@ -88,7 +88,10 @@ if __name__ == "__main__":
     circle_angle("Calibration/deg30_1.csv")
     circle_angle("Calibration/deg30_2.csv")
     circle_angle("Calibration/deg30_3.csv")
+    circle_angle("Calibration/deg30_4.csv")
 
     circle_angle("Calibration/deg45_1.csv")
     circle_angle("Calibration/deg45_2.csv")
     circle_angle("Calibration/deg45_3.csv")
+    circle_angle("Calibration/deg45_4.csv")
+    circle_angle("Calibration/deg45_5.csv")
