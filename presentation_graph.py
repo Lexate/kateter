@@ -37,4 +37,4 @@ with open("Calibration/cal.csv", mode='r', newline='') as csvfile:
         print(f"{float(row[2])}, {float(row[3])}, {float(row[4])}")
         ax.scatter(float(row[2]), float(row[3]), float(row[4]), marker='o', c=colour)
 
-fig.savefig("output.jpg", dpi=300)
+fig.savefig("output.jpg", dpi=1000)
