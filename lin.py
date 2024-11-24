@@ -100,33 +100,34 @@ def norm_cal(cal_path: str, zero_path: str):
     r3_zav = r3_zav / num_zero
 
     ####### Calc cal width #########
+    r1_min = 100000000
+    r1_max = 0
+    r2_min = 100000000
+    r2_max = 0
+    r3_min = 100000000
+    r3_max = 0
     with open(cal_path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
-        r1_min = 0
-        r1_max = 0
-        r2_min = 0
-        r2_max = 0
-        r3_min = 0
-        r3_max = 0
 
-        if float(row[2]) > r1_max:
-            r1_max = float(row[2])
-        if float(row[2]) > r1_min:
-            r1_min = float(row[2])
+        for row in reader:
+            if float(row[2]) > r1_max:
+                r1_max = float(row[2])
+            if float(row[2]) < r1_min:
+                r1_min = float(row[2])
 
-        if float(row[3]) > r2_max:
-            r2_max = float(row[3])
-        if float(row[3]) > r2_min:
-            r2_min = float(row[3])
+            if float(row[3]) > r2_max:
+                r2_max = float(row[3])
+            if float(row[3]) < r2_min:
+                r2_min = float(row[3])
 
-        if float(row[4]) > r3_max:
-            r2_max = float(row[4])
-        if row[4] > r3_min:
-            r2_min = float(row[4])
+            if float(row[4]) > r3_max:
+                r3_max = float(row[4])
+            if float(row[4]) < r3_min:
+                r3_min = float(row[4])
 
-    r1_width = abs(r1_min) - abs(r1_max)
-    r2_width = abs(r2_min) - abs(r2_max)
-    r3_width = abs(r3_min) - abs(r3_max)
+    r1_width = abs(r1_min - r1_max)
+    r2_width = abs(r2_min - r2_max)
+    r3_width = abs(r3_min - r3_max)
 
     with open(cal_path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
@@ -136,10 +137,15 @@ def norm_cal(cal_path: str, zero_path: str):
         
             for row in reader:
                 writer.writerow([row[0], row[1], 
-                                 (float(row[1]) - r1_zav) / r1_width, 
-                                 (float(row[2]) - r2_zav) / r1_width, 
-                                 (float(row[3]) - r3_zav) / r1_width
+                                 (float(row[2]) - r1_zav) / r1_width, 
+                                 (float(row[3]) - r2_zav) / r2_width, 
+                                 (float(row[4]) - r3_zav) / r3_width
                                  ])
+    
+    print(f"r1_max: {r1_max}, r2_max: {r2_max}, r3_max: {r3_max}")
+    print(f"r1_min: {r1_min}, r2_min: {r2_min}, r3_min: {r3_min}")
+    print(f"r1_zav: {r1_zav}, r2_zav: {r2_zav}, r3_zav: {r3_zav}")
+    print(f"r1_w: {r1_width}, r2_w: {r2_width}, r3_w: {r3_width}")
 
 
 

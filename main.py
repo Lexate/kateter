@@ -55,5 +55,27 @@ def main(r1: float, r2: float, r3: float):
 
     return (bend, rot)
 
+def main_norm(r1: float, r2: float, r3: float):
+    """Takes sensor values in the same order as calibrated and outputs the bend and rotation
+    of the catheter. To change the calibration values used or multiple that the rotation rounds 
+    to change the variables at the begining of the method.
+    """
+    import lin
+    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal.csv.norm"
+    rot_multiple = 90
+    
+    r1_zav = 4339.790551957599 
+    r2_zav = 4521.036211813887 
+    r3_zav = 4718.461220826446
+    r1_w = 200.89433800000006 
+    r2_w = 121.8990759999997 
+    r3_w = 31.675459999999475
+
+    (bend, rot) = lin.closest_point(path, ((r1 - r1_zav) / r1_w, (r2 - r2_zav) / r2_w, (r3 - r3_zav) / r3_w))
+
+    rot = round(rot / rot_multiple) * rot_multiple
+
+    return (bend, rot)
+
 if __name__ == "__main__":
     pass
