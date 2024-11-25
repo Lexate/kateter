@@ -46,12 +46,14 @@ def main(r1: float, r2: float, r3: float):
     to change the variables at the begining of the method.
     """
     import lin
-    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal.csv"
+    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv"
     rot_multiple = 90
+    bend_multiple = 15
 
     (bend, rot) = lin.closest_point(path, (r1, r2, r3))
 
     rot = round(rot / rot_multiple) * rot_multiple
+    bend = round(bend / bend_multiple) * bend_multiple
 
     return (bend, rot)
 
@@ -61,19 +63,20 @@ def main_norm(r1: float, r2: float, r3: float):
     to change the variables at the begining of the method.
     """
     import lin
-    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal.csv.norm"
+    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm"
     rot_multiple = 90
-    
-    r1_zav = 4339.790551957599 
-    r2_zav = 4521.036211813887 
-    r3_zav = 4718.461220826446
-    r1_w = 200.89433800000006 
-    r2_w = 121.8990759999997 
-    r3_w = 31.675459999999475
+    bend_multiple = 15
+    r1_min = 4341.816713918252
+    r2_min = 4463.215110493607
+    r3_min = 4731.756194338572
+    r1_w = 163.34466119674744
+    r2_w = 138.98287051813986
+    r3_w = 15.51729533179423
 
-    (bend, rot) = lin.closest_point(path, ((r1 - r1_zav) / r1_w, (r2 - r2_zav) / r2_w, (r3 - r3_zav) / r3_w))
+    (bend, rot) = lin.closest_point(path, ((r1 - r1_min) / r1_w, (r2 - r2_min) / r2_w, (r3 - r3_min) / r3_w))
 
     rot = round(rot / rot_multiple) * rot_multiple
+    bend = round(bend / bend_multiple) * bend_multiple
 
     return (bend, rot)
 

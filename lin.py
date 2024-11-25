@@ -16,9 +16,11 @@ def closest_point(path: str, sensors: tuple):
     t1 = time.time_ns()
     b = np.array(sensors)
 
-    closest_dist = 100000000000
-    closest_ang = (0, 0)
+    #              (distance, (bend, rot))
+    angles = []
     distance = 0
+    n_samples = 5
+
     with open(path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
 
@@ -26,13 +28,23 @@ def closest_point(path: str, sensors: tuple):
             a = np.array([float(x) for x in row[2:]])
 
             distance = np.linalg.norm(a - b)
-
-            if distance < closest_dist:
-                closest_dist = distance
-                closest_ang = tuple([float(row[0]), float(row[1])])
+        
+            angles.append((distance, tuple([float(row[0]), float(row[1])])))
     
+    closest = sorted(angles, key=lambda x: x[0])[:n_samples]
+
+    bend_av = 0
+    rot_av = 0
+
+    for p in closest:
+        bend_av += p[1][0]
+        rot_av += p[1][1]
+    
+    bend_av = bend_av / n_samples
+    rot_av = rot_av / n_samples
+
     print(f"total_time: {time.time_ns() - t1} ns")
-    return closest_ang
+    return (bend_av, rot_av)
 
 def generate_bench(n: int):
     """Generates a test file (bench.csv) of `n: int` random values for testing the 
@@ -135,6 +147,7 @@ def norm_cal(cal_path: str, zero_path: str):
     r2_width = abs(r2_min - r2_max)
     r3_width = abs(r3_min - r3_max)
 
+    ###### write normalized data to file ######
     with open(cal_path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
 
@@ -154,7 +167,7 @@ def norm_cal(cal_path: str, zero_path: str):
                                  ])
     
     print(f"r1_max: {r1_max}, r2_max: {r2_max}, r3_max: {r3_max}")
-    print(f"r1_min: {r1_min}, r2_min: {r2_min}, r3_min: {r3_min}")
+    print(f"r1_min = {r1_min} \nr2_min = {r2_min} \nr3_min = {r3_min}")
     print(f"r1_zav = {r1_zav} \nr2_zav = {r2_zav} \nr3_zav = {r3_zav}")
     print(f"r1_w = {r1_width} \nr2_w = {r2_width} \nr3_w = {r3_width}")
 
@@ -165,16 +178,20 @@ if __name__ == "__main__":
     #circle_angle("Calibration/deg15_1.csv")
     #circle_angle("Calibration/deg15_2.csv")
     #circle_angle("Calibration/deg15_3.csv")
-
+    #circle_angle("Calibration/deg15_4.csv")
+#
     #circle_angle("Calibration/deg30_1.csv")
     #circle_angle("Calibration/deg30_2.csv")
     #circle_angle("Calibration/deg30_3.csv")
     #circle_angle("Calibration/deg30_4.csv")
-
+#
     #circle_angle("Calibration/deg45_1.csv")
     #circle_angle("Calibration/deg45_2.csv")
     #circle_angle("Calibration/deg45_3.csv")
     #circle_angle("Calibration/deg45_4.csv")
-    #circle_angle("Calibration/deg45_5.csv")
-    norm_cal("Calibration/cal.csv", "Calibration/Cal_1/deg0.csv.cal")
-    norm_cal("Calibration/cal2.csv", "Calibration/deg0.csv.cal")
+    
+    #norm_cal("Calibration/cal.csv", "Calibration/Cal_1/deg0.csv.cal")
+    #norm_cal("Calibration/cal2.csv", "Calibration/deg0.csv.cal")
+    #norm_cal("Calibration/cal3.csv", "Calibration/deg0.csv.cal")
+
+    print(closest_point("C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm", (0.3, 0.8, 0.5)))
