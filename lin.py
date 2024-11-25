@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "numpy",
+# ]
+# ///
 import numpy as np
 import csv
 import random
@@ -136,10 +142,15 @@ def norm_cal(cal_path: str, zero_path: str):
             writer = csv.writer(cal_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
             for row in reader:
+                #writer.writerow([row[0], row[1], 
+                #                 (float(row[2]) - r1_zav) / r1_width, 
+                #                 (float(row[3]) - r2_zav) / r2_width, 
+                #                 (float(row[4]) - r3_zav) / r3_width
+                #                 ])
                 writer.writerow([row[0], row[1], 
-                                 (float(row[2]) - r1_zav) / r1_width, 
-                                 (float(row[3]) - r2_zav) / r2_width, 
-                                 (float(row[4]) - r3_zav) / r3_width
+                                 (float(row[2]) - r1_min) / r1_width, 
+                                 (float(row[3]) - r2_min) / r2_width, 
+                                 (float(row[4]) - r3_min) / r3_width
                                  ])
     
     print(f"r1_max: {r1_max}, r2_max: {r2_max}, r3_max: {r3_max}")

@@ -24,7 +24,7 @@ with open("Calibration/cal.csv", mode='r', newline='') as csvfile:
     colour = (0, 0, 0)
 
     for row in reader:
-        match row[1]:
+        match row[0]:
             case '0':
                 colour = [(114/255, 135/255, 253/255)] # lavender
             case '15':
