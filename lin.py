@@ -144,8 +144,8 @@ def norm_cal(cal_path: str, zero_path: str):
     
     print(f"r1_max: {r1_max}, r2_max: {r2_max}, r3_max: {r3_max}")
     print(f"r1_min: {r1_min}, r2_min: {r2_min}, r3_min: {r3_min}")
-    print(f"r1_zav: {r1_zav}, r2_zav: {r2_zav}, r3_zav: {r3_zav}")
-    print(f"r1_w: {r1_width}, r2_w: {r2_width}, r3_w: {r3_width}")
+    print(f"r1_zav = {r1_zav} \nr2_zav = {r2_zav} \nr3_zav = {r3_zav}")
+    print(f"r1_w = {r1_width} \nr2_w = {r2_width} \nr3_w = {r3_width}")
 
 
 
@@ -166,3 +166,4 @@ if __name__ == "__main__":
     #circle_angle("Calibration/deg45_4.csv")
     #circle_angle("Calibration/deg45_5.csv")
     norm_cal("Calibration/cal.csv", "Calibration/Cal_1/deg0.csv.cal")
+    norm_cal("Calibration/cal2.csv", "Calibration/deg0.csv.cal")
