@@ -18,9 +18,9 @@ def closest_point(path: str, sensors: tuple):
 
     #              (distance, (bend, rot))
     angles = []
-    distance = 0
     n_samples = 5
 
+    # Create an array of all angle pairs with their distance to the sensor values
     with open(path, mode='r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter = ',')
 
@@ -31,8 +31,10 @@ def closest_point(path: str, sensors: tuple):
         
             angles.append((distance, tuple([float(row[0]), float(row[1])])))
     
+    # Sort array by distance
     closest = sorted(angles, key=lambda x: x[0])[:n_samples]
 
+    # Average bend and rotation values
     bend_av = 0
     rot_av = 0
 
