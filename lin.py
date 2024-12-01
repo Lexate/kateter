@@ -46,6 +46,31 @@ def closest_point(path: str, sensors: tuple):
     print(f"total_time: {time.time_ns() - t1} ns")
     return (bend_av, rot_av)
 
+def closest_point_bad(path: str, sensors: tuple):
+    """Takes in a path to a calibration file and a tuple of sensors values and outputs
+    the angle of the closest calibration value in the provided file.
+    """
+    t1 = time.time_ns()
+    b = np.array(sensors)
+
+    closest_dist = 100000000000
+    closest_ang = (0, 0)
+    distance = 0
+    with open(path, mode='r', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter = ',')
+
+        for row in reader:
+            a = np.array([float(x) for x in row[2:]])
+
+            distance = np.linalg.norm(a - b)
+
+            if distance < closest_dist:
+                closest_dist = distance
+                closest_ang = tuple([float(row[0]), float(row[1])])
+    
+    print(f"total_time: {time.time_ns() - t1} ns")
+    return closest_ang
+
 def generate_bench(n: int):
     """Generates a test file (bench.csv) of `n: int` random values for testing the 
     performance of `closest_point()`
@@ -195,3 +220,4 @@ if __name__ == "__main__":
     #norm_cal("Calibration/cal3.csv", "Calibration/deg0.csv.cal")
 
     print(closest_point("C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm", (0.3, 0.8, 0.5)))
+    print(closest_point_bad("C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm", (0.3, 0.8, 0.5)))

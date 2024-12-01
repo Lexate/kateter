@@ -50,7 +50,7 @@ def main(r1: float, r2: float, r3: float):
     rot_multiple = 90
     bend_multiple = 15
 
-    (bend, rot) = lin.closest_point(path, (r1, r2, r3))
+    (bend, rot) = lin.closest_point_bad(path, (r1, r2, r3))
 
     rot = round(rot / rot_multiple) * rot_multiple
     bend = round(bend / bend_multiple) * bend_multiple
