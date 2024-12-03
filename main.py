@@ -63,15 +63,15 @@ def main_norm(r1: float, r2: float, r3: float):
     to change the variables at the begining of the method.
     """
     import lin
-    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm"
+    path = "C:/Users/lexa/Documents/Kateter/Calibration/cal4.csv.norm"
     rot_multiple = 90
     bend_multiple = 15
-    r1_min = 4341.816713918252
-    r2_min = 4463.215110493607
-    r3_min = 4731.756194338572
-    r1_w = 163.34466119674744
-    r2_w = 138.98287051813986
-    r3_w = 15.51729533179423
+    r1_min = 4366.6003266930775 
+    r2_min = 4487.682043771866 
+    r3_min = 4735.353573283766
+    r1_w = 133.77706013781244 
+    r2_w = 125.15161187360354 
+    r3_w = 13.977707265478784
 
     (bend, rot) = lin.closest_point(path, ((r1 - r1_min) / r1_w, (r2 - r2_min) / r2_w, (r3 - r3_min) / r3_w))
 

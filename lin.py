@@ -201,25 +201,25 @@ def norm_cal(cal_path: str, zero_path: str):
 
 
 if __name__ == "__main__":
-    #zero_zero("Calibration/deg0.csv")
-    #circle_angle("Calibration/deg15_1.csv")
-    #circle_angle("Calibration/deg15_2.csv")
-    #circle_angle("Calibration/deg15_3.csv")
-    #circle_angle("Calibration/deg15_4.csv")
-#
-    #circle_angle("Calibration/deg30_1.csv")
-    #circle_angle("Calibration/deg30_2.csv")
-    #circle_angle("Calibration/deg30_3.csv")
-    #circle_angle("Calibration/deg30_4.csv")
-#
-    #circle_angle("Calibration/deg45_1.csv")
-    #circle_angle("Calibration/deg45_2.csv")
-    #circle_angle("Calibration/deg45_3.csv")
-    #circle_angle("Calibration/deg45_4.csv")
+    zero_zero("Calibration/deg0.csv")
+    circle_angle("Calibration/deg15_1.csv")
+    circle_angle("Calibration/deg15_2.csv")
+    circle_angle("Calibration/deg15_3.csv")
+    circle_angle("Calibration/deg15_4.csv")
+
+    circle_angle("Calibration/deg30_1.csv")
+    circle_angle("Calibration/deg30_2.csv")
+    circle_angle("Calibration/deg30_3.csv")
+    circle_angle("Calibration/deg30_4.csv")
+
+    circle_angle("Calibration/deg45_1.csv")
+    circle_angle("Calibration/deg45_2.csv")
+    circle_angle("Calibration/deg45_3.csv")
+    circle_angle("Calibration/deg45_4.csv")
     
     #norm_cal("Calibration/cal.csv", "Calibration/Cal_1/deg0.csv.cal")
     #norm_cal("Calibration/cal2.csv", "Calibration/deg0.csv.cal")
-    #norm_cal("Calibration/cal3.csv", "Calibration/deg0.csv.cal")
+    norm_cal("Calibration/cal4.csv", "Calibration/deg0.csv.cal")
 
     print(closest_point("C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm", (0.3, 0.8, 0.5)))
     print(closest_point_bad("C:/Users/lexa/Documents/Kateter/Calibration/cal3.csv.norm", (0.3, 0.8, 0.5)))
